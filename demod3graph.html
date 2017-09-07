@@ -39,62 +39,19 @@ body {
  width:150px;
  height: 50px;   
 }
+label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  left: 1000px;
+  top: 10px;
+}
 </style>
 <body>
 <div id="body">
       <div id="chart"></div>
     </div>
     <!--
-    <input type="file" id="files" name="files[]" multiple />
-<output id="list"></output>
-
-<script>
-// Check for the various File API support.
-if (window.File && window.FileReader && window.FileList && window.Blob) {
-  // Great success! All the File APIs are supported.
-} else {
-  alert('The File APIs are not fully supported in this browser.');
-}
-  function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-  }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
-  <script>
-  var files = document.getElementById('files').files;
-    if (files.length) {
-          var file = files[0];
-    alert(file);
-      //alert('Please select a file!');S
-    }
-  </script>
-
-<script type="text/javascript">
-  /*var e = document.getElementById("fileSelectionMenu");
-  var strUser = e.options[e.selectedIndex].text;
-  console.log(strUser);*/
-  function runOnFile() {
-    var e = document.getElementById("fileSelectionMenu")
-        alert(e.options[e.selectedIndex].text);
-    }
-    function runOnOperation() {
-      var e = document.getElementById("operationSelectionMenu")
-        alert(e.options[e.selectedIndex].text);
-    }
-</script>
-  <script src="createGraph.js"> //createGraph  graph 
-  </script>
+  <label><input style="width:240px;" type="range" min="0" max="1" step="any" value="0.5"> Link Strength</label>
 -->
 <h2>Choose the Knowledge Graph you want to visualize and the operation</h2>
 <table>
@@ -124,7 +81,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 <script>
   function buildGraph(){
 d3.select("svg").remove();
-    
+
     /**********************************/
     /*
 The file we got in input is Composed by a JSON object, the result of the
@@ -232,13 +189,6 @@ function linkCreator(key,value){
   return links.concat();
 }
 
-//Debugging function
-function print5links(links){
-  for (var i=0, l=5; i<l; i++){
-    console.log(JSON.stringify(links[i]));
-  }
-}
-
 function drawMyGraph(links){
   //print5links(links); //ne stampa molti di più
   var nodes = {};
@@ -291,7 +241,28 @@ function drawMyGraph(links){
       .attr('r', 4.5)
       .filter(function(d) { return !/^\d+$/.test(d.name) && d.name.length>5});
         //.style("fill", "red")
-        //.attr("r", 5.5);
+       //.attr("r", 5.5);
+
+  node.on("mouseover", function (d) {
+        link.style('stroke-width', function(l) {
+            if (d === l.source || d === l.target)
+            return 4;
+          else
+            return 1.5;
+        });
+        link.style('stroke', function(l) {
+            if (l.type=='interest')
+            return 'blue';
+            if (l.type=='parents')
+            return 'red';
+        });
+
+      })
+      .on("mouseout",function (d) {
+        link.style('stroke-width', 1.5)
+
+      });
+
 
   var label = node.append('text')
     .attr('dy','.35em')
@@ -323,7 +294,7 @@ function drawMyGraph(links){
         .attr("y", function(d) { return d.y; });
 
   }
-
+  /*
   function mouseover(){
     d3.select(this).select("text").style("visibility", "visible");
     /*d3.selectAll('.link').style('stroke-width', function(l) {
@@ -332,12 +303,12 @@ function drawMyGraph(links){
       return 8;
     else
       return 2;
-    });*/
+    });
   }
   function mouseout(){
     d3.select(this).select("text").style("visibility", "hidden");
     //d3.selectAll('.link').style('stroke-width', 2);
-  }
+  }*/
 }
     /**********************************/
   }
