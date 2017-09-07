@@ -5,15 +5,21 @@ algebric operation. It's structure is:
 */
 
 //THIS IS THE NEW READER FUNCTION, USED TO EXTRACT DATA COMPUTED BY THE JAR FILE
+var fileTable = document.getElementById("fileSelectionMenu");
+var operationTable = document.getElementById("operationSelectionMenu");
+var linkFile = fileTable.options[fileTable.selectedIndex].text;
+var operation = operationTable.options[operationTable.selectedIndex].text;
+var outputFile = operation+'_'+linkFile.split('.')[0]+'.txt';
+
 d3.queue(2)
-.defer(d3.text, './output.txt')
-.defer(d3.text, 'prova2utenti.json')
+.defer(d3.text, './output/'+outputFile)
+.defer(d3.text, linkFile)
 .await(function(err, data, data2){
   if (err) throw err;
   //Work on first file
   data=JSON.parse(data);
   var usersList = data.users.split('-');
-  usersList.splice(-1,1);
+  //usersList.splice(-1,1);
 
   //Work on second file
   var interestLinks=[];
@@ -69,9 +75,10 @@ function jsonExtractor(fields, obj){
 }
 //Return a list containing all the interests for that user
 function getValuesFromMap(obj, attributes){
-  var attr=[];
   var interests = [];
-  Object.keys(obj).forEach(function(k) {//extracts keys from the map of interests
+  if (obj){
+    var attr=[];
+    Object.keys(obj).forEach(function(k) {//extracts keys from the map of interests
     var return_value = '';
     return_value += k;
   
@@ -80,6 +87,7 @@ function getValuesFromMap(obj, attributes){
   });
   interests.push(return_value);
   });
+  }
   return interests;
 }
 
@@ -123,9 +131,9 @@ function drawMyGraph(links){
       .nodes(d3.values(nodes))
       .links(links)
       .size([w, h])
-      //.gravity(0.1)
-      .linkDistance(80)
-      .charge(-500)
+      .gravity(0.5)
+      .linkDistance(200)
+      .charge(-800)
       .on("tick", tick)
       .start();
       
