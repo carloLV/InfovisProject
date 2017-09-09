@@ -10,9 +10,17 @@ The project is composed by 3 main pieces:
 ## infovisDemo.jar
 Runnable with `java -jar infovisDemo.jar 3utenti.json`. The *.sh* script simply runs this command.
 **Note**
-Run jar on file too big is useless for the analysis. The operation are implemented to study on subsets of users.
+Run jar on file too big is useless for the analysis. The operation are implemented to study subsets of users.
 
 ## Modify the project
 If you want to use others files, you have to change the logic of the extraction. In this file operations are performed using `d3.text` and `d3.json`. Modify that functions to change behaviour.
 The extraction made by jar file is the same of the original project, so go to the link upside if you want more information
+
+## Use
+To visualize **output** run in this folder a new python server with command `python -m SimpleHTTPServer 8000`.
+Then open browser and visit `localhost:8000/demod3graph.html`
+You can use the selection menu to decide files and operations. If you want you can add your file, following the sintax of examples (or rewriting the parser).
+**Note**
+1. The jar needs to be computed externally. Some example files are already present, with their outputs.
+2. To add files to the menu you have to manually add it in the *html* file.
 
