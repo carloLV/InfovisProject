@@ -1,0 +1,95 @@
+body {
+	background-color: #d5e1df;
+}
+.link {
+	stroke: #777;
+	stroke-opacity: 0.3;
+	stroke-width: 1.5px;
+}
+.node circle {
+	fill: #ccc;
+	stroke: #111;
+	stroke-width: 1.5px;
+}
+
+.node text {
+	display: none;
+	font: 10px sans-serif;
+}
+
+.node:hover circle {
+	fill: #000;
+}
+
+.node:hover text {
+	display: inline;
+}
+#fileSelectionMenu{
+	width:150px;
+	height: 50px;   
+}
+#operationSelectionMenu{
+	width:150px;
+	height: 50px;   
+}
+label {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+
+.panel{
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
+	width: 100%;
+}
+.column-left{ float: left; width: 33%;}
+.column-right{ float: right; width: 33%;}
+.column-center{ display: inline-block; width: 33%; }
+
+h3 {
+	text-align: center;
+	color: #AD2A1A;
+}
+div {
+	color: #AD2A1A;
+	font-size: large;
+	font-style: italic;
+	font-family: Georgia, Serif, "Times New Roman";
+}
+input[type='range'] {
+	width: 210px;
+	height: 30px;
+	overflow: hidden;
+	cursor: pointer;
+}
+input[type='range'],
+input[type='range']::-webkit-slider-runnable-track,
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+}
+input[type='range']::-webkit-slider-runnable-track {
+	width: 200px;
+	height: 10px;
+	background: #AAA;
+}
+input[type='range']::-webkit-slider-thumb {
+	position: relative;
+	height: 30px;
+	width: 30px;
+	margin-top: -10px;
+	background: steelblue;
+	border-radius: 50%;
+	border: 2px solid white;
+}
+input[type='range']::-webkit-slider-thumb::before {
+	position: absolute;
+	content: '';
+	height: 10px; /* equal to height of runnable track */
+	width: 500px; /* make this bigger than the widest range input element */
+	left: -502px; /* this should be -2px - width */
+	top: 8px; /* don't change this */
+	background: #d5e1df;
+}

@@ -5,6 +5,7 @@
 	<title> d3 Graph</title>
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script>
 		function buildGraph(){
 			d3.select("svg").remove();
@@ -31,6 +32,9 @@ d3.queue(2)
   //Work on first file
   data=JSON.parse(data);
   var usersList = data.users.split('-');
+  if (usersList.length>1)
+  	usersList.splice(-1,1);
+  console.log(usersList);
 
   //Work on second file
   var interestLinks=[];
@@ -104,13 +108,14 @@ function getValuesFromMap(obj, attributes){
 function linkCreator(key,value){
 	var links=[];
 	for (var i=0, l=key.length; i<l; i++){
+		console.log(key[i])
 		for (var j=0, len=value.length; j<len; j++){
 			var link = JSON.stringify({source: key[i], target: value[j], type: 'interest'});
 			links.push(JSON.parse(link));
 		}
 	}
 
-	return links.concat();
+	return links;
 }
 
 function drawMyGraph(links){
@@ -124,14 +129,22 @@ function drawMyGraph(links){
 		link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 	});
 
-	function linkDistance(d) {
-		d3.select("#linkDist").on("input", function() {
-			return (+this.value);
-		});
-	}
+	var svg = d3.select("#chart").append("svg")
+	.attr("width", w)
+	.attr("height", h);
 
 	d3.select("#linkDist").on("input", function() {
 		force.linkDistance(+this.value)
+		.start();
+	});
+
+	d3.select("#charge").on("input", function() {
+		force.charge(this.value*(-10))
+		.start();
+	});
+
+	d3.select("#gravity").on("input", function() {
+		force.gravity(this.value/100)
 		.start();
 	});
 
@@ -144,11 +157,6 @@ function drawMyGraph(links){
 	.charge(-800)
 	.on("tick", tick)
 	.start();
-
-	var svg = d3.select("#chart").append("svg")
-	.attr("width", w)
-	.attr("height", h);
-
 
 	var link = svg.selectAll('.link')
 	.data(links)
@@ -216,84 +224,45 @@ function drawMyGraph(links){
 }
 </script>
 </head>
-<style>
-	body {
-		background-color: lightgrey;
-	}
-	.link {
-		stroke: #777;
-		stroke-opacity: 0.3;
-		stroke-width: 1.5px;
-	}
-	.node circle {
-		fill: #ccc;
-		stroke: #111;
-		stroke-width: 1.5px;
-	}
-
-	.node text {
-		display: none;
-		font: 10px sans-serif;
-	}
-
-	.node:hover circle {
-		fill: #000;
-	}
-
-	.node:hover text {
-		display: inline;
-	}
-	#fileSelectionMenu{
-		width:150px;
-		height: 50px;   
-	}
-	#operationSelectionMenu{
-		width:150px;
-		height: 50px;   
-	}
-	label {
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		position: absolute;
-		left: 10px;
-		top: 5px;
-	}
-</style>
 <body>
-	<div>
-		<label>
-			<p>Choose the Knowledge Graph you want to visualize and the operation</p>
-			<table>
-				<tr>
-					<td>
-						<select id="fileSelectionMenu" name="fileSelectionMenu" onchange="buildGraph()">
-							<option value="1">3utenti.json</option>
-							<option value="2">2utenti.json</option>
-							<option value="3">5utenti.json</option>
-							<option value="4">10utenti.json</option>
-						</select>
-					</td>
-					<td>
-						<select id="operationSelectionMenu" name="operationSelectionMenu" onchange="buildGraph()">
-							<option value="1">Intersection</option>
-							<option value="2">Union</option>
-							<option value="3">Difference</option>
-							<option value="4">None</option>
-						</select>
-					</td>
-					<td>
-						<p>
-							<label for="linkDist" >
-								radius = <span id="linkDist-value">…</span>
-							</label>
-							<input type="range" min="0" max="1000" id="linkDist">
-						</p>
-
-					</td>
-				</tr>
-			</table>
-		</label>
+	<h3>Choose the Knowledge Graph you want to visualize and the operation</h3>
+	<div >
+		<table>
+			<tr>
+				<td>
+					<select id="fileSelectionMenu" name="fileSelectionMenu" onchange="buildGraph()">
+						<option value="1">3utenti.json</option>
+						<option value="2">2utenti.json</option>
+						<option value="3">5utenti.json</option>
+						<option value="4">10utenti.json</option>
+					</select>
+				</td>
+				<td>
+					<select id="operationSelectionMenu" name="operationSelectionMenu" onchange="buildGraph()">
+						<option value="1">Intersection</option>
+						<option value="2">Union</option>
+						<option value="3">Difference</option>
+						<option value="4">None</option>
+					</select>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<div id="chart"></div>
-</body>
-</html>
+	<div class='panel'>
+		<div class="column-left">
+			Gravity:
+			<input type="range" min="1" max="100" id="gravity">
+		</div>
+		<div class="column-left">
+			Link Distance:
+			<input type="range" min="0" max="1000" id="linkDist">
+
+		</div>
+		<div class="column-right">
+			Charge: 
+			<input type="range" min="10" max="100" id="charge">
+		</div></div>
+		<div id="chart"></div>
+	</body>
+	</html>
 
