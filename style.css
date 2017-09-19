@@ -87,9 +87,9 @@ input[type='range']::-webkit-slider-thumb {
 input[type='range']::-webkit-slider-thumb::before {
 	position: absolute;
 	content: '';
-	height: 10px; /* equal to height of runnable track */
-	width: 500px; /* make this bigger than the widest range input element */
-	left: -502px; /* this should be -2px - width */
-	top: 8px; /* don't change this */
+	height: 10px; 
+	width: 500px; 
+	left: -502px; 
+	top: 8px;
 	background: #d5e1df;
 }
