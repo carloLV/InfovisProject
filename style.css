@@ -52,6 +52,8 @@ label {
 h3 {
 	text-align: center;
 	color: #AD2A1A;
+	font-style: italic;
+	font-family: Georgia, Serif, "Times New Roman";
 }
 div {
 	color: #AD2A1A;
@@ -92,4 +94,15 @@ input[type='range']::-webkit-slider-thumb::before {
 	left: -502px; 
 	top: 8px;
 	background: #d5e1df;
+}
+select{
+	font-family:Cursive;
+line-height:1;
+border-radius:5px;
+background-color:#b5e7a0;
+color: #AD2A1A;
+font-size:20px;
+-webkit-appearance:none;
+box-shadow:inset 0 0 10px 0 rgba(0,0,0,0.6);
+outline:none
 }
