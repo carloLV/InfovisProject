@@ -1,5 +1,5 @@
 body {
-	background-color: #d5e1df;
+	background-color: white;
 }
 .link {
 	stroke: #777;
@@ -99,7 +99,7 @@ select{
 	font-family:Cursive;
 line-height:1;
 border-radius:5px;
-background-color:#b5e7a0;
+background-color: lightblue;
 color: #AD2A1A;
 font-size:20px;
 -webkit-appearance:none;

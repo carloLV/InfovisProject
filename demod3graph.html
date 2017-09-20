@@ -197,7 +197,8 @@ function drawMyGraph(links){
 	});
 
 	var label = node.append('text')
-	.attr('dy','.35em')
+	.style("font-size","20px")
+	//.attr('dy','25px')
 	.text(function(d){ return d.name; });
 
 	function tick() {
