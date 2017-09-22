@@ -6,7 +6,37 @@
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="./graphCreator.js"></script>
+	<script src="./graphCreator2.js"></script>
+
+	<script>
+	function hideRed(){
+		d3.selectAll('.link').filter(function(d){
+			return d3.select(this).attr('type')=='parents'})
+		.style('opacity',0);
+	}
+
+	function hideBlue(){
+		d3.selectAll('.link').filter(function(d){
+			return d3.select(this).attr('type')=='interest'})
+		.style('opacity',0);
+	}
+	function showRed(){
+		d3.selectAll('.link').filter(function(d){
+			return d3.select(this).attr('type')=='parents'})
+		.style('opacity',1);
+	}
+	function showBlue(){
+		d3.selectAll('.link').filter(function(d){
+			return d3.select(this).attr('type')=='interest'})
+		.style('opacity',1);
+	}
+
+	/******************************************/
+	/*** Here prepare a LookUp table to get info on overed node ****/
+	
+
+	</script>
+
 </head>
 <body>
 	<h3>Choose the Knowledge Graph you want to visualize and the operation</h3>
@@ -28,6 +58,28 @@
 						<option value="3">Difference</option>
 						<option value="4">None</option>
 					</select>
+				</td>
+				<td>
+				</td>
+				<td>
+					<button type="button" id="hideRed" onclick="hideRed()">
+						Hide red links
+					</button>
+				</td>
+				<td>
+					<button type="button" id="hideBlue" onclick="hideBlue()">
+						Hide blue links
+					</button>
+				</td>
+				<td>
+					<button type="button" id="showRed" onclick="showRed()">
+						Show red links
+					</button>
+				</td>
+				<td>
+					<button type="button" id="showBlue" onclick="showBlue()">
+						Show blue links
+					</button>
 				</td>
 			</tr>
 		</table>
