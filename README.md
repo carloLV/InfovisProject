@@ -20,6 +20,20 @@ The extraction made by jar file is the same of the original project, so go to th
 To visualize **output** run in this folder a new python server with command `python -m SimpleHTTPServer 8000`.
 Then open browser and visit `localhost:8000/demod3graph.html`
 You can use the selection menu to decide files and operations. If you want you can add your file, following the sintax of examples (or rewriting the parser).
+
+## GUI
+The **top div** contains a selection menu to choose your file, and four **buttons** to hide or show the two kind of links.
+
+In the **second div** there are three slidebars, to change some parameters of the force layout.
+
+The node representing **interests** of user are *grey*, while **users** are *red*.
+
+The links **User <-> Interest** are *blue* and **Interest <-> Parents Interests** are *red*. 
+
+**Mouse Over** on node highlights its link and shows the node name.
+
+**Click** on a node highlights only the node and its links. 
+
 **Note**
 1. The jar needs to be computed externally. Some example files are already present, with their outputs.
 2. To add files to the menu you have to manually add it in the *html* file.
