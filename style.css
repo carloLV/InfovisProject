@@ -52,15 +52,22 @@ label {
 h3 {
 	text-align: center;
 	color: black;
-	font-size: 25px;
+	font-size: 20px;
 	font-style: italic;
 	font-family: Georgia, Serif, "Times New Roman";
 }
 div {
 	color: black;
-	font-size: large;
+	font-size: medium;
 	font-style: italic;
 	font-family: Georgia, Serif, "Times New Roman";
+}
+.intTable {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border: 3px solid #73AD21;
+    padding: 10px;
 }
 input[type='range'] {
 	width: 210px;

@@ -12,28 +12,24 @@
 	function hideRed(){
 		d3.selectAll('.link').filter(function(d){
 			return d3.select(this).attr('type')=='parents'})
-		.style('opacity',0);
+		.attr('visibility', 'hidden');
 	}
 
 	function hideBlue(){
 		d3.selectAll('.link').filter(function(d){
 			return d3.select(this).attr('type')=='interest'})
-		.style('opacity',0);
+		.attr('visibility', 'hidden');
 	}
 	function showRed(){
 		d3.selectAll('.link').filter(function(d){
 			return d3.select(this).attr('type')=='parents'})
-		.style('opacity',1);
+		.attr('visibility', 'visible');
 	}
 	function showBlue(){
 		d3.selectAll('.link').filter(function(d){
 			return d3.select(this).attr('type')=='interest'})
-		.style('opacity',1);
+		.attr('visibility', 'visible');
 	}
-
-	/******************************************/
-	/*** Here prepare a LookUp table to get info on overed node ****/
-	
 
 	</script>
 
@@ -97,7 +93,10 @@
 		<div class="column-right">
 			Charge: 
 			<input type="range" min="10" max="100" id="charge">
-		</div></div>
+		</div>
+	</div>
+	<div class="intTable" id="infoDiv" visibility='hidden'>
+	</div>
 		<div id="chart"></div>
 	</body>
 	</html>

@@ -1,5 +1,6 @@
 var focusNode = null, highlightNode = null;
 var highlightTrans = 0.1;
+var lookupTable={};
 
 function buildGraph(){
 	d3.select("svg").remove();
@@ -35,6 +36,7 @@ d3.queue(2)
   var interestsMap={};
   var elements = data2.split('\n');
   for (var i=0, l=elements.length; i<l; i++){
+  	lookupTableAdd(elements[i]);
   	var interests = parseLine(elements[i]);
   	interests.forEach(function(el){
   		var id = el.split('-')[0];
@@ -62,6 +64,24 @@ d3.queue(2)
   drawMyGraph(finalLinks); 
 
 });
+
+  /******************************************/
+	/*** Here prepare a LookUp table to get info on interests when overed ***/
+	
+function lookupTableAdd(line){
+	obj = JSON.parse(line);
+	var interests = obj.info.interests.all;
+	var ids = d3.keys(interests);
+	for (var i=0, l=ids.length; i<l; i++){
+		var key = ids[i];
+		if (lookupTable[key] == null){
+			var data = JSON.stringify({parents: interests[key].parents, name: interests[key].name, display: interests[key].display, category: interests[key].category})
+			lookupTable[key] = data;
+		}
+	}
+}
+
+/*********** ************** ******************/
 
 //This function is applied to each line. It creates data in the map
 let parseLine = function(line){
@@ -102,7 +122,6 @@ function getValuesFromMap(obj, attributes){
 function linkCreator(key,value){
 	var links=[];
 	for (var i=0, l=key.length; i<l; i++){
-		console.log(key[i])
 		for (var j=0, len=value.length; j<len; j++){
 			var link = JSON.stringify({source: key[i], target: value[j], type: 'interest'});
 			links.push(JSON.parse(link));
@@ -207,6 +226,10 @@ function drawMyGraph(links){
 			else
 				return 1.5;
 		});
+		var testo = lookupTable[d.name];
+		d3.select('#infoDiv').attr('visibility','visible')
+		.append('text')
+		.style('font-weight','bold').text(testo);
 	})
 	.on("mousedown", function(d){
 		d3.event.stopPropagation();
@@ -216,6 +239,8 @@ function drawMyGraph(links){
 	})
 	.on("mouseout",function (d) {
 		link.style('stroke-width', 1.5)
+		d3.select('#infoDiv').select('text').remove();
+		d3.select('#infoDiv').attr('visibility','hidden');
 	});
 
 	var label = node.append('text')
