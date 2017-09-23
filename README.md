@@ -1,5 +1,5 @@
 # InfovisProject
-This folder contains the final project for InfoVis course. It takes knowledge graphs computed in BigData project and visualizes them.
+This folder contains the final project for [InfoVis course](http://www.dia.uniroma3.it/~infovis/index.php). It takes knowledge graphs computed in BigData project and visualizes them.
 
 # Info 
 The project is composed by 3 main pieces:
