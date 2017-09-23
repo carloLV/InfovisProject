@@ -30,7 +30,7 @@ The node representing **interests** of user are *grey*, while **users** are *red
 
 The links **User <-> Interest** are *blue* and **Interest <-> Parents Interests** are *red*. 
 
-**Mouse Over** on node highlights its link and shows the node name.
+**Mouse Hover** on node highlights its links and shows the node name. In the bottom of page are shown some informations about the node.
 
 **Click** on a node highlights only the node and its links. 
 
