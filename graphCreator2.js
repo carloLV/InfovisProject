@@ -61,6 +61,10 @@ d3.queue(2)
 
   }
   var finalLinks = linkCreator(usersList, data.interests).concat(interestLinks);
+  //Reset slidebars when reloading graph
+  d3.select("#linkDist").property("value", 500);
+  d3.select("#gravity").property("value", 50);
+  d3.select("#charge").property("value", 50);
   drawMyGraph(finalLinks); 
 
 });
@@ -220,16 +224,21 @@ function drawMyGraph(links){
 	.filter(function(d) { return !/^\d+$/.test(d.name) && d.name.length>5});
 
 	node.on("mouseover", function (d) {
+		var connections = 0;
 		link.style('stroke-width', function(l) {
-			if (d === l.source || d === l.target)
+			if (d === l.source || d === l.target){
+				connections+=1;
 				return 4;
+			}
 			else
 				return 1.5;
 		});
 		var testo = lookupTable[d.name];
+		if (testo == null) testo=d.name;
 		d3.select('#infoDiv').attr('visibility','visible')
+		.style('background','white')
 		.append('text')
-		.style('font-weight','bold').text(testo);
+		.style('font-weight','bold').text(testo+ ' links number: '+connections);
 	})
 	.on("mousedown", function(d){
 		d3.event.stopPropagation();
@@ -239,7 +248,7 @@ function drawMyGraph(links){
 	})
 	.on("mouseout",function (d) {
 		link.style('stroke-width', 1.5)
-		d3.select('#infoDiv').select('text').remove();
+		d3.select('#infoDiv').style('background','transparent').select('text').remove();
 		d3.select('#infoDiv').attr('visibility','hidden');
 	});
 
