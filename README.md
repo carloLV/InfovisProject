@@ -1,5 +1,5 @@
 # InfovisProject
-This folder contains the final project for InfoVis course. It takes knowledge graphs computed in BigData project and visualizes them.
+This folder contains the final project for [InfoVis course](http://www.dia.uniroma3.it/~infovis/index.php). It takes knowledge graphs computed in BigData project and visualizes them.
 
 # Info 
 The project is composed by 3 main pieces:
@@ -30,7 +30,7 @@ The node representing **interests** of user are *grey*, while **users** are *red
 
 The links **User <-> Interest** are *blue* and **Interest <-> Parents Interests** are *red*. 
 
-**Mouse Over** on node highlights its link and shows the node name.
+**Mouse Hover** on node highlights its links and shows the node name. In the bottom of page are shown some informations about the node.
 
 **Click** on a node highlights only the node and its links. 
 
