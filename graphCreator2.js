@@ -16,12 +16,12 @@ var fileTable = document.getElementById("fileSelectionMenu");
 var operationTable = document.getElementById("operationSelectionMenu");
 var linkFile = fileTable.options[fileTable.selectedIndex].text;
 var operation = operationTable.options[operationTable.selectedIndex].text;
-var outputFile = operation+'_'+linkFile.split('.')[0]+'.txt';
+var outputFile = operation+'_'+linkFile+'.txt';
 
 //THIS IS THE NEW READER FUNCTION, USED TO EXTRACT DATA COMPUTED BY THE JAR FILE
 d3.queue(2)
 .defer(d3.text, './output/'+outputFile)
-.defer(d3.text, linkFile)
+.defer(d3.text, './10utenti.json')
 .await(function(err, data, data2){
 	if (err) throw err;
   //Work on first file

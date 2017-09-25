@@ -8,8 +8,10 @@ The project is composed by 3 main pieces:
 3. The **html** page to visualize the output of the JAR.
 
 ## infovisDemo.jar
-Runnable with `java -jar infovisDemo.jar 3utenti.json`. The *.sh* script simply runs this command.
+Runnable with `java -jar infovisDemo.jar inputFile.json outputFile`.
+You can prepare your own json file, or use the one with 1500 users and select the ids of users on which you want to perform operations. For the use of jar go to the above link.
 **Note**
+The name of outputFile does NOT need the extension.
 Run jar on file too big is useless for the analysis. The operation are implemented to study subsets of users.
 
 ## Modify the project
@@ -37,4 +39,3 @@ The links **User <-> Interest** are *blue* and **Interest <-> Parents Interests*
 **Note**
 1. The jar needs to be computed externally. Some example files are already present, with their outputs.
 2. To add files to the menu you have to manually add it in the *html* file.
-
